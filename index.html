@@ -197,6 +197,27 @@
             margin-bottom: 12px;
         }
 
+.download-button {
+    background: linear-gradient(135deg, #6B21A8 0%, #4C1D95 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.download-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(107, 33, 168, 0.3);
+}
+
+        .qr-placeholder {
+        }
+
         .qr-placeholder {
             width: 150px;
             height: 150px;
@@ -265,7 +286,12 @@
                     <div class="contact-text">LinkedIn Profil</div>
                 </a>
             </div>
-
+<div class="contact-section">
+    <span class="contact-label">Kontakt Speichern</span>
+    <button onclick="downloadContact()" class="download-button">
+        📱 Als Kontakt speichern
+    </button>
+</div>
             <div class="qr-section">
                 <div class="qr-label">QR Code</div>
                 <img src="qr-code.png" alt="QR Code" style="width: 200px; height: 200px;">
@@ -276,5 +302,28 @@
             <div class="footer-text">© 2026 Extreme Networks. Alle Rechte vorbehalten.</div>
         </div>
     </div>
+    <script>
+function downloadContact() {
+    const vCard = `BEGIN:VCARD
+VERSION:3.0
+FN:Anton Magomedow
+N:Magomedow;Anton;;;
+TITLE:Account Executive
+ORG:Extreme Networks
+TEL;TYPE=WORK:+49 69 47860103
+TEL;TYPE=CELL:+49 151 15044785
+EMAIL:amagomedow@extremenetworks.com
+URL:https://www.linkedin.com/in/anton-magomedow/
+END:VCARD`;
+
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(vCard));
+    element.setAttribute('download', 'Anton-Magomedow.vcf');
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+</script>
 </body>
 </html>
